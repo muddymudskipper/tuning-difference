@@ -386,7 +386,7 @@ TuningDifference::computeFeatureFromSignal(const Signal &signal,
 
     TFeature totals(m_bpo, 0.0);
 
-    cerr << "computeFeatureFromSignal: hz = " << hz << ", frame count = " << m_frameCount << endl;
+    //cerr << "computeFeatureFromSignal: hz = " << hz << ", frame count = " << m_frameCount << endl;
     
     for (int i = 0; i < m_frameCount; ++i) {
 	Signal::const_iterator first = signal.begin() + i * m_blockSize;
@@ -480,7 +480,7 @@ TuningDifference::getRemainingFeaturesForChannel(int channel,
 
     int coarseCents = -(rotation * 1200) / m_bpo;
 
-    cerr << "channel " << channel << ": rotation " << rotation << " -> cents " << coarseCents << endl;
+    //cerr << "channel " << channel << ": rotation " << rotation << " -> cents " << coarseCents << endl;
 
     TFeature rotatedFeature = otherFeature;
     if (rotation != 0) {
@@ -502,7 +502,7 @@ TuningDifference::getRemainingFeaturesForChannel(int channel,
         fs[m_outputs["cents"]][0].values.push_back(float(fineCents));
         fs[m_outputs["tuningfreq"]][0].values.push_back(float(fineHz));
     
-        cerr << "channel " << channel << ": overall best Hz = " << fineHz << endl;
+        //cerr << "channel " << channel << ": overall best Hz = " << fineHz << endl;
 
     } else {
 
@@ -568,8 +568,8 @@ TuningDifference::findFineFrequency(const TFeature &rotatedOtherFeature,
     int bestCents = coarseCents;
     double bestHz = frequencyForCentsAbove440(coarseCents);
 
-    cerr << "findFineFrequency: coarse frequency is " << bestHz << endl;
-    cerr << "searchDistance = " << searchDistance << endl;
+    //cerr << "findFineFrequency: coarse frequency is " << bestHz << endl;
+    //cerr << "searchDistance = " << searchDistance << endl;
 
     double bestScore = 0;
     bool firstScore = true;
@@ -582,7 +582,7 @@ TuningDifference::findFineFrequency(const TFeature &rotatedOtherFeature,
 	    int fineCents = coarseCents + sign * offset;
 	    double fineHz = frequencyForCentsAbove440(fineCents);
 
-	    cerr << "trying with fineCents = " << fineCents << "..." << endl;
+	    //cerr << "trying with fineCents = " << fineCents << "..." << endl;
 
             // compare the rotated "other" chroma with a reference
             // chroma shifted by the offset in the opposite direction
@@ -608,12 +608,12 @@ TuningDifference::findFineFrequency(const TFeature &rotatedOtherFeature,
                                                rotatedOtherFeature,
                                                0); // we are rotated already
 
-	    cerr << "fine offset = " << offset << ", cents = " << fineCents
-		 << ", Hz = " << fineHz << ", score " << fineScore
-		 << " (best score so far " << bestScore << ")" << endl;
+	    //cerr << "fine offset = " << offset << ", cents = " << fineCents
+		// << ", Hz = " << fineHz << ", score " << fineScore
+		// << " (best score so far " << bestScore << ")" << endl;
 	    
 	    if ((fineScore < bestScore) || firstScore) {
-		cerr << "is good!" << endl;
+		//cerr << "is good!" << endl;
 		bestScore = fineScore;
 		bestCents = fineCents;
 		bestHz = fineHz;

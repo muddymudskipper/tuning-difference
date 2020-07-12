@@ -16,4 +16,4 @@ MAKEFILE_EXT  := .osx
 
 include Makefile.inc
 
-
+# sudo install_name_tool -change libvamp-sdk.dylib /usr/local/lib/libvamp-sdk.dylib /Library/Audio/Plug-Ins/Vamp/tuning-difference.dylib
